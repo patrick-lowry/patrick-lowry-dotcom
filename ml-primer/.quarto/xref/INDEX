@@ -1,0 +1,20 @@
+{
+  "index.qmd": {
+    "index.html": "7863b251"
+  },
+  "chapters/01-regression.ipynb": {
+    "01-regression.html": "7fad0d62"
+  },
+  "chapters/00-setup.ipynb": {
+    "00-setup.html": "c64752a6"
+  },
+  "chapters/02-vectors.ipynb": {
+    "02-vectors.html": "ea81334c"
+  },
+  "chapters/03-classification.ipynb": {
+    "03-classification.html": "2bfa2897"
+  },
+  "chapters/04-classification-02.ipynb": {
+    "04-classification-02.html": "e07e4105"
+  }
+}

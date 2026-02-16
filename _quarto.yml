@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Patrick Lowry"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: ML Primer
+        href: ml-primer/
+      - text: ML Projects
+        href: ml-projects/
+
+format:
+  html:
+    theme: cyborg
+    toc: true
+
+execute:
+  freeze: auto
+  warning: false
+  message: false

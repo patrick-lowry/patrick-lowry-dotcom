@@ -1,0 +1,24 @@
+# Quarto build output
+_site/
+/.quarto/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# macOS
+.DS_Store
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Legacy/duplicate config
+_quarto.ml
+
+# AWS / secrets (just in case)
+.env
+*.pem

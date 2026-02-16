@@ -1,0 +1,18 @@
+project:
+  type: book
+  output-dir: ../_site/ml-primer
+
+book:
+  title: "ML Primer"
+  chapters:
+    - index.qmd
+    - chapters/00-setup.ipynb
+    - chapters/01-regression.ipynb
+    - chapters/02-vectors.ipynb
+    - chapters/03-classification.ipynb
+    - chapters/04-classification-02.ipynb
+
+format:
+  html:
+    theme: darkly
+    toc: true

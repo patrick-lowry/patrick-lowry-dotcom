@@ -1,0 +1,36 @@
+---
+title: "Home"
+---
+
+![](assets/img/hero_perceptron.png){width="100%"}
+
+::: {.grid}
+
+::: {.g-col-4}
+[![](assets/img/regression.png)](ml-primer/chapters/01-regression.ipynb)
+
+### [Regression](ml-primer/chapters/01-regression.ipynb)
+
+Linear and non-linear regression
+
+:::
+
+::: {.g-col-4}
+[![](assets/img/vectors.png)](ml-primer/chapters/02-vectors.ipynb)
+
+### [Vectors](ml-primer/chapters/02-vectors.ipynb)
+
+How vectors are used to establish similarity.
+:::
+
+::: {.g-col-4}
+[![](assets/img/classification.png)](ml-primer/chapters/03-classification.ipynb)
+
+### [Classification 01](ml-primer/chapters/03-classification.ipynb)
+
+Linear classification using perceptron.
+:::
+
+:::
+
+
