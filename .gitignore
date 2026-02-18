@@ -22,3 +22,5 @@ _quarto.ml
 # AWS / secrets (just in case)
 .env
 *.pem
+
+**/*.quarto_ipynb
