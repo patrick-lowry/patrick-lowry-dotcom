@@ -1,0 +1,82 @@
+name: Deploy Quarto Site to S3
+
+# Trigger this workflow whenever code is pushed to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code onto the GitHub Actions runner
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Install Quarto CLI so we can render the site
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.6.42"  # Pin version for reproducibility
+
+      # Step 3: Set up Python (needed for the Jupyter notebooks in ml-primer)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # Step 4: Install Python dependencies (ML libraries used in notebooks)
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      # Step 5: Render the Quarto site — outputs built HTML to _site/
+      - name: Render Quarto site
+        run: quarto render
+
+      # Step 6: Configure AWS credentials using GitHub Secrets
+      # These secrets must be set in: GitHub repo → Settings → Secrets → Actions
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Step 7: Sync all non-CSS/JS files to S3
+      # --delete removes files in S3 that no longer exist locally
+      - name: Sync files to S3
+        run: |
+          aws s3 sync _site/ s3://${{ secrets.S3_BUCKET }} \
+            --delete \
+            --exclude "*.css" \
+            --exclude "*.js"
+
+      # Step 8: Sync CSS files with correct MIME type
+      # S3 doesn't always detect CSS correctly — we set it explicitly
+      - name: Sync CSS files with correct MIME type
+        run: |
+          aws s3 sync _site/ s3://${{ secrets.S3_BUCKET }} \
+            --exclude "*" \
+            --include "*.css" \
+            --content-type "text/css" \
+            --metadata-directive REPLACE
+
+      # Step 9: Sync JS files with correct MIME type
+      - name: Sync JS files with correct MIME type
+        run: |
+          aws s3 sync _site/ s3://${{ secrets.S3_BUCKET }} \
+            --exclude "*" \
+            --include "*.js" \
+            --content-type "application/javascript" \
+            --metadata-directive REPLACE
+
+      # Step 10: Invalidate CloudFront cache so visitors see the latest content immediately
+      # Without this, CloudFront may serve stale cached files for up to 24 hours
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
