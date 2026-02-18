@@ -1,4 +1,4 @@
-Welcome to my ML Primer.
+Basic Machine Learning Theory - with limited Maths.
 
 ## Chapters
 - [Python setup](chapters/00-setup.ipynb)

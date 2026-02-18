@@ -8,9 +8,9 @@ website:
     left:
       - text: Home
         href: index.qmd
-      - text: ML Primer
+      - text: ML Theory
         href: ml-primer/
-      - text: ML Projects
+      - text: Applied ML
         href: ml-projects/
 
 format:
