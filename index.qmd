@@ -26,7 +26,7 @@ title: "Home"
 ::: {.grid}
 
 ::: {.g-col-4 style="padding-left: 2.0rem;"}
-#### [Regression overivew](ml-primer/chapters/01-regression.ipynb)
+#### [Regression overview](ml-primer/chapters/01-regression.ipynb)
 
 Introduction to linear and non-linear regression
 :::

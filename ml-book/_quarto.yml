@@ -1,0 +1,11 @@
+project:
+  type: website
+  output-dir: ../_site/ml-book
+
+website:
+  title: "ML Book"
+
+format:
+  html:
+    theme: darkly
+    toc: true

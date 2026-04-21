@@ -1,0 +1,97 @@
+---
+title: "Neural Networks"
+---
+
+# How Neural Networks Work – A Simple Introduction
+
+This is a simplified explanation of how neural networks work to help understanding.
+
+---
+
+## Part 1
+
+### What is a Neural Network?
+
+You can think of a neural network as a web of millions of tiny calculators linked together in rows. They perform their calculations on some input (e.g an image) to aim to produce a result. Each tiny calculator in the web is a neuron, all a neuron does is receives input data, performs a very simple calculation and sends the result to the next set of neurons. This process repeats until a final answer is provided. That is literally it.
+
+The power of a neural network comes from the combined calculations of millions of neurons acting together. They are arranged in layers with the outputs of all neurons in one layer providing the inputs to all the neurons in the next layer and so on. Each layer could have thousands of neurons and there can be thousands of layers. For example, one of the earliest neural networks used in image recognition had over 650,000 neurons.
+
+---
+
+### A Simple Analogy
+
+Have you ever seen the TV game show ‘Tipping Point’? (If you have, forgive me if I describe it slightly differently to aid explanation….)
+
+A contestant drops a silver disc into the top of a device consisting of vertical columns arranged side by side - each column is about a metre high. For the sake of explanation, we’ll imagine there’s a bucket underneath each column with number 1, 2, 3, or 4 written on it. The silver disc is dropped into one of the columns at the top of device and makes its way down until it pops out the bottom, landing in one of the buckets. But the path through the device is blocked by a number of rods positioned at regular intervals and aligned in horizontal rows. When the disc hits a rod, it’s pushed to the left or the right. By the time it reaches the bottom, the disc could end up in a bucket to the right or left of where it was originally dropped in. The contestant is trying to get the disc to end up in a particular bucket in order to win a prize.
+
+The diagram below shows a very simple view of how the game works - with four columns and 3 rows of rods - 4 rods in each row. The disc is placed by the contestant in column 3 but actually ends up in bucket 1 after hitting 3 rods along the way.
+
+![Tipping Point Diagram 1](tipping_point_1.png)
+
+Conceptually, this physical device is very similar to a Neural Network. Imagine the disc has a picture on it, let’s say a picture of a cat - this is the input to the network. Next, imagine each bucket also has an image on it - e.g. a cat, an owl a frog and a dog - these represent the possible outputs of the neural network (also called the predictions). The rods are the neurons - but rather than nudging a disc, the neurons are performing a calculation on data.
+
+The path of the disc through the device mirrors how data moves through a neural network. As the disc travels down from the top, it’s nudged by each rod until it eventually lands in a bucket at the bottom. In the same way, data passes through layers of neurons, where each neuron performs a small calculation. By the time the data reaches the final layer, the combination of all calculations performed by all the neurons produces a final result - the network’s prediction about what the input data represents.
+
+In the example below, the rods have nudged the disc with the image on it to the far right such that it ends up in the bucket marked ‘frog’ - in the terms of a neural network, it has predicted that the image of a cat is actually an image of a frog - i.e. it guessed wrong.
+
+![Tipping Point Diagram 3](tipping_point_3.png)
+
+---
+
+### How could this ever work?
+
+The secret to making correct predictions, is that each rod doesn’t nudge by the same amount. All the rods can be tuned to nudge by different amounts. If there are enough rods (and a neural network has many neurons), the combination of all nudges results in the image being placed in the correct bucket.
+
+In neural network terms, rather than physically nudging a disc, a neuron performs a simple calculation on data. The scale of this calculation (akin to the force a rod applies) is controlled by numbers called weights. The process of tuning the weights so that the network gives the right answer is called ‘training’. Training simply adjusts these numbers (weights) through a long series of trial and error.
+
+At the start of training, a neural network consists of neurons with randomly assigned weights. During training, the network is fed thousands of images where the contents of the image is already known. The first image is fed, each neuron performs its calculation, eventually resulting in a prediction - which will almost certainly be incorrect. Every time the network ‘predicts’ the wrong answer for an image, the weights of all the neurons are modified very slightly (through a process called back propagation) and the next image is fed in. Eventually the weights of each neuron become so finely tuned that the network starts to guess right almost every time (this is called convergence). Once the network has converged, training can be deemed to have been completed and the weights are frozen.
+
+The network should now be able to predict whether an image it hasn’t seen before is a cat, dog, owl or frog.
+
+![Tipping Point Diagram 4](tipping_point_4.png)
+
+Conceptually, that is it!
+
+---
+
+## Part 2
+
+### What’s happening mathematically?
+
+Each neuron in a network performs a very simple calculation which amounts to multiplying the input it receives by its weight and then applying a factor on top - the factor is called the activation:
+
+The weight of a neuron is just a number, assigned randomly at first and then modified through training.
+
+The input to a layer of neurons is the output from the previous layer. The first set of neurons don’t have a predecessor, their input is a numerical representation of the item we want the network to analyse - whether that be an image, a word, a piece of audio etc. All these types of input can be represented as numbers. An image, for example, is just a set of pixels where each pixel is a number from 0 to 255 (actually, for a colour image, each pixel has 3 numbers - one for each of Red, Green and Blue (RGB). For a greyscale image, there’s only one number per pixel - ranging from 0 for white up to 255 for black)
+
+There are various types of activation, but a simple one is called Relu which essentially performs this calculation:
+
+> If the multiplication of the input by the weight is positive, then keep that number, otherwise set the neuron’s output to zero.
+
+---
+
+### Is it really that simple?
+
+Conceptually yes, but in reality there are of course extra complexities. If you’re interested and wish to know more, read on:
+
+1. Firstly, the input to a network is not a single number but a list of numbers in a specific order - called a vector...
+
+2. This is important because neurons don’t actually have a single weight - they have many weights...
+
+3. The mathematical operation that each neuron performs consists of two parts...
+
+4. The final output of the network is also a vector...
+
+5. The network is constructed so that all values in the output vector are between 0 and 1...
+
+6. Remember that in training we know what’s in all the images...
+
+7. So, if the network outputs a vector [0.2, 0.4, 0.1, 0.3]...
+
+8. To tune the network, the output is compared to the correct answer...
+
+9. The mechanism and amount by which each of the weights are updated...
+
+---
+
+**Simples!**

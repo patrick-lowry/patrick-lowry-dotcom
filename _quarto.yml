@@ -12,10 +12,13 @@ website:
         href: ml-primer/
       - text: Applied ML
         href: ml-projects/
+      - text: ML Book
+        href: ml-book/
 
 format:
   html:
     theme: cyborg
+    css: assets/css/custom-dark.css
     toc: true
 
 execute:
