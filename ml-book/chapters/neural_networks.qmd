@@ -26,7 +26,7 @@ A contestant drops a silver disc into the top of a device consisting of vertical
 
 The diagram below shows a very simple view of how the game works - with four columns and 3 rows of rods - 4 rods in each row. The disc is placed by the contestant in column 3 but actually ends up in bucket 1 after hitting 3 rods along the way.
 
-![Tipping Point Diagram 1](tipping_point_1.png)
+![Tipping Point Diagram 1](tipping_point_1.png){width="50%"}
 
 Conceptually, this physical device is very similar to a Neural Network. Imagine the disc has a picture on it, let’s say a picture of a cat - this is the input to the network. Next, imagine each bucket also has an image on it - e.g. a cat, an owl a frog and a dog - these represent the possible outputs of the neural network (also called the predictions). The rods are the neurons - but rather than nudging a disc, the neurons are performing a calculation on data.
 
@@ -34,7 +34,7 @@ The path of the disc through the device mirrors how data moves through a neural 
 
 In the example below, the rods have nudged the disc with the image on it to the far right such that it ends up in the bucket marked ‘frog’ - in the terms of a neural network, it has predicted that the image of a cat is actually an image of a frog - i.e. it guessed wrong.
 
-![Tipping Point Diagram 3](tipping_point_3.png)
+![Tipping Point Diagram 3](tipping_point_3.png){width="50%"}
 
 ---
 
@@ -48,7 +48,7 @@ At the start of training, a neural network consists of neurons with randomly ass
 
 The network should now be able to predict whether an image it hasn’t seen before is a cat, dog, owl or frog.
 
-![Tipping Point Diagram 4](tipping_point_4.png)
+![Tipping Point Diagram 4](tipping_point_4.png){width="50%"}
 
 Conceptually, that is it!
 
