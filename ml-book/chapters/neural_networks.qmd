@@ -74,24 +74,20 @@ There are various types of activation, but a simple one is called Relu which ess
 
 Conceptually yes, but in reality there are of course extra complexities. If you’re interested and wish to know more, read on:
 
-1. Firstly, the input to a network is not a single number but a list of numbers in a specific order - called a vector...
+1. Firstly, the input to a network is not a single number but a list of numbers in a specific order - called a vector. The simplest example is an image. If a greyscale image is 4 pixels across by 4 pixels down - that gives 16 pixels in total. For a greyscale image (without colour) each pixel has a number between 0 and 255 where 0 is black, 255 is white and the values in between are shades of grey. Thus a greyscale  image can be represented simply as 16 numbers each from 0 to 255. Similarly a 1024 x 1024 greyscale image has 1,048,576 numbers. If that image is colour rather than greyscale, then each pixel has 3 numbers associated with it (i.e. the Red Green Blue numbers). Thus a  1024 x 1024 RGB colour image has 1,048,576 x 3 numbers ie 3,145,728 numbers. Formally, these collections of numbers are called vectors and the number of numbers is called the dimension of the vector. So for our simple 4x4 greyscale image we say the input is a vector of dimension 16.
 
-2. This is important because neurons don’t actually have a single weight - they have many weights...
+2. This is important because neurons don’t actually have a single weight - they have many weights. Each neuron in the first layer has a weight for each dimension of the input. Each neuron in subsequent layers has a weight for each of the neurons in the layer before it. The number of weights can therefore explode - AlexNet developed in 2012 was trained on over 1,000,000 images, each of 224x224 pixels, it had over 650,000 neurons in 8 layers and a total of over 60,000,000 individual weights!!!! 
 
-3. The mathematical operation that each neuron performs consists of two parts...
+3. The mathematical operation that each neuron performs consists of two parts - The first part is a multiplication (called the vector dot product) - whereby each element of input vector is multiplied by its corresponding weight and the results are added up. The second part is called an activation function - common examples are tanhh, sigmoid and Relu. The Relu activation function is the simplest - it just sets the result of the neuron’s calculation to 0 if the previous step returned a negative number, otherwise it returns the result of the previous step as-is
 
-4. The final output of the network is also a vector...
+4. The final output of the network is also a vector - the dimension of this vector is the same as the number of possible outcomes. So if the network has to classify an image as one of 4 types of animals the output vector will be of dimension 4.
 
-5. The network is constructed so that all values in the output vector are between 0 and 1...
+5. The network is constructed so that the all values in the output vector are between 0 and 1 and that they in total add up to 1 (e.g. [0.2, 0.4, 0.1, 0.3]. This has the effect of providing a probability distribution for each possible outcome. There is a special calculation at the final step of the network which converts the output of the last layer of neurons to a probability (called the Softmax function) 
 
-6. Remember that in training we know what’s in all the images...
+6. Remember that in training we know what’s in all the images. If there are images of 4 types of animals we will assign each type of animal to one of the elements in the output vector. Thus we might have 0: cat 1: dog 2: owl 3 :frog. For example, a frog would be represented by [0,0,0,1] and a cat by [1,0,0,0]
 
-7. So, if the network outputs a vector [0.2, 0.4, 0.1, 0.3]...
+7. So, I the network outputs a vector [0.2, 0.4, 0.1, 0.3] we can correspond that to the network thinking with 40% certainty that the image it has been provided with is a dog (as position one has a value of 0.4) and with 30% certainty that its a frog. If in fact the image is a cat well, the network was only 20% certain that the image was a cat - thus its’ way off the mark - this is key to updating the weights
 
-8. To tune the network, the output is compared to the correct answer...
+8. To tune the network, the output is compared to the correct answer to work out how ‘wrong’ the network was - this is called the ‘loss’ of the network. It’s calculated via a process called cross-entropy loss and then this loss is used to update all the weights in the network. The larger the loss the bigger the adjustment to the weights!
 
-9. The mechanism and amount by which each of the weights are updated...
-
----
-
-**Simples!**
+9. The mechanism and amount by which each of the weights are updated is based upon high-school differential calculus in a process called back-propagation. We won’t go into that here, but you can imagine it to provide a way of attributing the loss to neurons depending upon the amount their weights influenced the answer the network provided  
