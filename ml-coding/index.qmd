@@ -1,6 +1,8 @@
-Basic Machine Learning Theory - with limited Maths.
+---
+title: Machine Learning Fundamentals - Learn through coding
+---
 
-## Chapters
+### Contents
 - [Python setup](chapters/00-setup.ipynb)
 - [Regression](chapters/01-regression.ipynb)
 - [Vectors](chapters/02-vectors.ipynb)

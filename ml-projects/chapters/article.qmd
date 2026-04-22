@@ -1,0 +1,7 @@
+---
+title: "Article Title"
+---
+
+## Introduction
+
+Article content goes here.

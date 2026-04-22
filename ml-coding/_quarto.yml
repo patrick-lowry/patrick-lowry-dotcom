@@ -1,9 +1,9 @@
 project:
   type: book
-  output-dir: ../_site/ml-primer
+  output-dir: ../_site/ml-coding
 
 book:
-  title: "ML Primer"
+  title: "ML through Coding"
   chapters:
     - index.qmd
     - chapters/00-setup.ipynb

@@ -1,9 +1,9 @@
 project:
   type: website
-  output-dir: ../_site/ml-fundamentals
+  output-dir: ../_site/ml-projects
 
 website:
-  title: "ML Fundamentals"
+  title: "My Projects"
 
 format:
   html:

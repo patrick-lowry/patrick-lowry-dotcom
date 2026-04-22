@@ -2,47 +2,22 @@
 title: "Home"
 ---
 
-![](assets/img/hero_perceptron.png){width="100%"}
+## Machine Learning – Fundamentals for Non-techies
+
+- [Neural Networks](ml-fundamentals/chapters/neural_networks.qmd)
 
 ---
 
-## Theory
-::: {.grid}
+## Machine Learning – Learn through Coding
 
-::: {.g-col-4}
-[![](assets/img/regression.png)](ml-primer/chapters/01-regression.ipynb)
-:::
+- [Python Setup](ml-coding/chapters/00-setup.ipynb)
+- [Regression](ml-coding/chapters/01-regression.ipynb)
+- [Vectors](ml-coding/chapters/02-vectors.ipynb)
+- [Classification 01](ml-coding/chapters/03-classification.ipynb)
+- [Classification 02](ml-coding/chapters/04-classification-02.ipynb)
 
-::: {.g-col-4}
-[![](assets/img/vectors.png)](ml-primer/chapters/02-vectors.ipynb)
-:::
+---
 
-::: {.g-col-4}
-[![](assets/img/classification.png)](ml-primer/chapters/03-classification.ipynb)
-:::
+## My Projects
 
-:::
-
-::: {.grid}
-
-::: {.g-col-4 style="padding-left: 2.0rem;"}
-#### [Regression overview](ml-primer/chapters/01-regression.ipynb)
-
-Introduction to linear and non-linear regression
-:::
-
-::: {.g-col-4 style="padding-left: 2.0rem;"}
-#### [Vectors](ml-primer/chapters/02-vectors.ipynb)
-
-How vectors are crucial to Machine Learning by establishing similarity between features.
-:::
-
-::: {.g-col-4 style="padding-left: 2.0rem;"}
-#### [Classification 01](ml-primer/chapters/03-classification.ipynb)
-
-Linear classification - using perceptron.
-:::
-
-:::
-
-
+- [Articel](ml-projects/chapters/article.qmd)

@@ -8,12 +8,12 @@ website:
     left:
       - text: Home
         href: index.qmd
-      - text: ML Theory
-        href: ml-primer/
-      - text: Applied ML
+      - text: ML Fundamentals
+        href: ml-fundamentals/
+      - text: ML Coding
+        href: ml-coding/
+      - text: My Projects
         href: ml-projects/
-      - text: ML Book
-        href: ml-book/
 
 format:
   html:

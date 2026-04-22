@@ -1,6 +1,11 @@
 # Quarto build output
 _site/
 /.quarto/
+**/.quarto/
+**/*_files/
+
+# Claude Code
+.claude/
 
 # Python
 .venv/
