@@ -17,7 +17,7 @@ website:
 
 format:
   html:
-    theme: cyborg
+    theme: lux
     css: assets/css/custom-dark.css
     toc: true
 
