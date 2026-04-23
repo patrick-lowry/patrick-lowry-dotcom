@@ -5,6 +5,7 @@ title: "Home"
 ## Machine Learning – Fundamentals for Non-techies
 
 - [Neural Networks](ml-fundamentals/chapters/neural_networks.qmd)
+- [Vectors](ml-fundamentals/chapters/vectors.qmd)
 
 ---
 
@@ -20,4 +21,4 @@ title: "Home"
 
 ## My Projects
 
-- [Articel](ml-projects/chapters/article.qmd)
+- [Article](ml-projects/chapters/article.qmd)
