@@ -12,8 +12,8 @@ website:
         href: ml-fundamentals/
       - text: ML Coding
         href: ml-coding/
-      - text: My Projects
-        href: ml-projects/
+#      - text: My Projects
+#        href: ml-projects/
 
 format:
   html:

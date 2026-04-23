@@ -19,6 +19,8 @@ title: "Home"
 
 ---
 
+<!--
 ## My Projects
 
 - [Article](ml-projects/chapters/article.qmd)
+-->
