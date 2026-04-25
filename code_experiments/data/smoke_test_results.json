@@ -1,0 +1,38 @@
+[
+  {
+    "label": "llm_date_parse",
+    "model": "claude-haiku-4-5-20251001",
+    "input_tokens": 32,
+    "output_tokens": 10,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 679.2047179988003,
+    "tool_calls": [],
+    "cost_usd": 0.000246,
+    "total_tokens": 42
+  },
+  {
+    "label": "python_date_parse",
+    "model": "claude-haiku-4-5-20251001",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 0.2578699932200834,
+    "tool_calls": [],
+    "cost_usd": 0.0,
+    "total_tokens": 0
+  },
+  {
+    "label": "llm_genuine_task",
+    "model": "claude-haiku-4-5-20251001",
+    "input_tokens": 37,
+    "output_tokens": 101,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 1797.4195510032587,
+    "tool_calls": [],
+    "cost_usd": 0.001626,
+    "total_tokens": 138
+  }
+]

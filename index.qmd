@@ -19,6 +19,14 @@ title: "Home"
 
 ---
 
+---
+
+## Applied ML
+
+- [Agent Costs](applied-ml/chapters/agent-costs.qmd)
+
+---
+
 <!--
 ## My Projects
 

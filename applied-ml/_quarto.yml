@@ -1,0 +1,11 @@
+project:
+  type: website
+  output-dir: ../_site/applied-ml
+
+website:
+  title: "Applied ML"
+
+format:
+  html:
+    theme: lux
+    toc: true

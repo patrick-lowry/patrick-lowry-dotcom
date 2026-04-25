@@ -1,0 +1,30 @@
+---
+title: "Reducing Agent Costs"
+---
+
+There’s still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, and such assumptions can lead to erroneous results and exploding costs — particularly when non-language tasks are pushed through an expensive language interface. 
+
+This is rooted in a misunderstanding of what an agent is and what a Large Language Model is. Hopefully this article will help clarify that, and through an example I’ll show how I was able to reduce my LLM costs by 75%.
+
+A Large Language Model’s core capability is in interpreting language. Trained on large-scale text corpora, an LLM builds a high-dimensional representation of language patterns within its neural network that allows it to associate words with each other based on context. For example, in the sentence *“I read the paper”*, the LLM will associate the word *paper* with newspapers, magazines, journals etc., whereas in the sentence *“it was made of paper”* the word has a completely different meaning and may instead be associated with materials like wood or cardboard.
+
+Being able to interpret language does not make an LLM an expert weather predictor or stock market analyst. It cannot reliably provide real-time information such as the current weather or predict stock prices without access to external systems, so if you want to reduce LLM costs you should recognise that and avoid using it for tasks it’s not designed for.
+
+### So how come ChatGPT can seemingly do all this?
+
+The reason ChatGPT can appear omnipotent is because it has access to tools that it can call upon. Given a prompt, it can interpret the meaning and associate the request with the tools available to it. ChatGPT is not just an LLM — it’s an agent: an orchestration layer that combines an LLM with tools, memory, and control logic to solve a problem.
+
+Let’s take the weather example. There are plenty of websites and open APIs that can provide weather data when given a location.
+
+A typical scenario would be:
+
+1. User prompt to ChatGPT: “What’s the weather in London?”
+2. ChatGPT (an agent) provides its LLM with descriptions of available tools (e.g. a weather API)
+3. The LLM selects the appropriate tool based on semantic matching between the prompt and the tool descriptions  
+4. ChatGPT invokes the weather service and retrieves the response  
+5. The LLM formats the result into a natural language response  
+6. The agent returns the response to the user  
+
+What this shows is that the LLM is only responsible for interpreting and generating language. 
+
+Therefore, the key to reducing costs is to use an LLM only where language understanding is required. Everything else — particularly deterministic, repeatable, or computational tasks — should be handled outside of the agentic workflow.

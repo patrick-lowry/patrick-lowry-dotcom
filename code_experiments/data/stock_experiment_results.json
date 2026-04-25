@@ -1,0 +1,50 @@
+[
+  {
+    "label": "agent_a_no_tools",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 56,
+    "output_tokens": 332,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 8860.026743001072,
+    "tool_calls": [],
+    "cost_usd": 0.005148,
+    "total_tokens": 388
+  },
+  {
+    "label": "agent_b_web_search",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 27425,
+    "output_tokens": 1178,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 21787.489000998903,
+    "tool_calls": [],
+    "cost_usd": 0.099945,
+    "total_tokens": 28603
+  },
+  {
+    "label": "agent_c_data_fetch",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 871.5562040015357,
+    "tool_calls": [],
+    "cost_usd": 0.0,
+    "total_tokens": 0
+  },
+  {
+    "label": "agent_c_llm_reasoning",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 181,
+    "output_tokens": 210,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 5257.943181997689,
+    "tool_calls": [],
+    "cost_usd": 0.003693,
+    "total_tokens": 391
+  }
+]
