@@ -1,30 +1,74 @@
 ---
-title: "Reducing Agent Costs"
+title: "Reducing LLM costs - don't ask them to do everything!"
+format: html
 ---
 
-There’s still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, and such assumptions can lead to erroneous results and exploding costs — particularly when non-language tasks are pushed through an expensive language interface. 
+There's still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, and such assumptions can lead to erroneous results and exploding costs — particularly when non-language tasks are pushed through an expensive language interface.
 
-This is rooted in a misunderstanding of what an agent is and what a Large Language Model is. Hopefully this article will help clarify that, and through an example I’ll show how I was able to reduce my LLM costs by 75%.
+This is rooted in a misunderstanding of what an agent is and what a Large Language Model is. Hopefully this article will help clarify that, and through a real experiment I'll show how choosing the right architecture reduced my LLM costs by over 96%.
 
-A Large Language Model’s core capability is in interpreting language. Trained on large-scale text corpora, an LLM builds a high-dimensional representation of language patterns within its neural network that allows it to associate words with each other based on context. For example, in the sentence *“I read the paper”*, the LLM will associate the word *paper* with newspapers, magazines, journals etc., whereas in the sentence *“it was made of paper”* the word has a completely different meaning and may instead be associated with materials like wood or cardboard.
+## An LLM's job is to interpret and generate language
 
-Being able to interpret language does not make an LLM an expert weather predictor or stock market analyst. It cannot reliably provide real-time information such as the current weather or predict stock prices without access to external systems, so if you want to reduce LLM costs you should recognise that and avoid using it for tasks it’s not designed for.
+A Large Language Model's core capability is in interpreting and generating language. Trained on large-scale text corpora, an LLM builds a high-dimensional representation of language patterns within its neural network that allows it to associate words with each other based on context. For example, in the sentence *"I read the paper"*, the LLM will associate the word *paper* with newspapers, magazines, journals etc., whereas in the sentence *"it was made of paper"* the word has a completely different meaning and may instead be associated with materials like wood or cardboard.
 
-### So how come ChatGPT can seemingly do all this?
+## An LLM does not continue to learn once it is deployed
 
-The reason ChatGPT can appear omnipotent is because it has access to tools that it can call upon. Given a prompt, it can interpret the meaning and associate the request with the tools available to it. ChatGPT is not just an LLM — it’s an agent: an orchestration layer that combines an LLM with tools, memory, and control logic to solve a problem.
+An LLM can interpret language only against the data it was trained upon. If you prompt an LLM for today's news headlines, a well-designed model will typically acknowledge its knowledge cutoff and decline to answer — though in some cases it may hallucinate (make something up). Large language models are trained on data up to a specific date — after which their knowledge is frozen. Events, discoveries, or changes after this cutoff may result in outdated or incorrect responses.
 
-Let’s take the weather example. There are plenty of websites and open APIs that can provide weather data when given a location.
+| Model | Training Data Cutoff |
+|:------|:---------------------|
+| Claude 3 Haiku | August 2023 |
+| Claude 3 Sonnet | August 2023 |
+| Claude 3 Opus | August 2023 |
+| Claude 3.5 Sonnet (original) | April 2024 |
+| Claude 3.5 Sonnet (new, Oct 2024) | April 2024 |
+| Claude 3.5 Haiku | July 2024 |
+| Claude Sonnet 4.6 | August 2025 |
 
-A typical scenario would be:
+: Training cutoff dates for Anthropic Claude models {.striped .hover}
 
-1. User prompt to ChatGPT: “What’s the weather in London?”
-2. ChatGPT (an agent) provides its LLM with descriptions of available tools (e.g. a weather API)
-3. The LLM selects the appropriate tool based on semantic matching between the prompt and the tool descriptions  
-4. ChatGPT invokes the weather service and retrieves the response  
-5. The LLM formats the result into a natural language response  
-6. The agent returns the response to the user  
+## Much of the work of an agent is spent calling tools under the instruction of an LLM
 
-What this shows is that the LLM is only responsible for interpreting and generating language. 
+Considering that an LLM "only" interprets and generates language — how does something like ChatGPT provide such meaningful and relevant results? The answer is through additional tools that have a very verbose description. For example, ChatGPT will have access to a Web Search tool, a Weather tool and a Stock Lookup tool. Each of these tools will have a well-documented definition (like an instruction manual) that describes in clear language what the tool does, how to use it and what response it returns. In fact, a standard has emerged called the Model Context Protocol for describing tools so they can be discovered by LLMs.
+
+Because an LLM can interpret language, it is able to decipher the user's prompt and match it to the context provided by the tool and then call the tool to return a response.
+
+This can be illustrated via the weather example. A typical interaction might be:
+
+1. User prompts ChatGPT: "What's the weather in London?"
+2. ChatGPT, acting as an agent, provides its LLM with the user's prompt and descriptions of available tools in its kit bag (e.g. "This weather service can provide the current weather when provided with the name of a city, it returns the current temperature in degrees celsius, wind speed in mph and wind direction as a compass heading")
+3. Using its language interpretation skills, the agent's LLM semantically matches the user's prompt with the tool descriptions and associates the weather tool with the user's request
+4. ChatGPT invokes the weather service and retrieves the response
+5. ChatGPT's LLM formats the result into a natural language response
+6. It returns the response to the user
+
+What this shows is that the LLM is only responsible for interpreting and generating language.
 
 Therefore, the key to reducing costs is to use an LLM only where language understanding is required. Everything else — particularly deterministic, repeatable, or computational tasks — should be handled outside of the agentic workflow.
+
+## A Worked Example — Reducing LLM Costs by 96%
+
+In this worked example I call an LLM directly (i.e. not via ChatGPT or claude.ai) — this allows me to report on token usage and thus cost, and compare scenarios where I provide tools versus no tools.
+
+As an example we consider a user who wants an analysis of a portfolio of stocks and shares. We test three different architectures to satisfy this request:
+
+- **Agent A (no tools)** — the LLM is given only the user's question and must rely entirely on its training data to estimate stock prices. It produces an answer quickly and cheaply, but the prices are invented — this is hallucination in practice.
+- **Agent B (web search)** — the LLM is given a web search tool so it can look up live prices itself. It returns a correct answer, but in doing so it retrieves and processes large volumes of search result text, flooding the context with tokens it largely doesn't need.
+- **Agent C (smart architecture)** — stock prices are fetched deterministically in code using a free market data API, portfolio values are calculated programmatically, and only the resulting figures are passed to the LLM. The LLM is asked to do only what an LLM should do: reason about the data and respond in natural language.
+
+The results speak for themselves:
+
+| Experiment | Input Tokens | Output Tokens | Total Tokens | Latency | Cost (USD) |
+|:-----------|-------------:|--------------:|-------------:|--------:|-----------:|
+| Agent A — no tools | 56 | 332 | 388 | 8,860ms | $0.0051 |
+| Agent B — web search | 27,425 | 1,178 | 28,603 | 21,787ms | $0.0999 |
+| Agent C — data fetch | 0 | 0 | 0 | 872ms | $0.0000 |
+| Agent C — LLM reasoning | 181 | 210 | 391 | 5,258ms | $0.0037 |
+
+: Token usage and cost by agent architecture {.striped .hover}
+
+Agent C's data fetch step costs nothing — it is plain Python code calling a free API, with no LLM involved at all. The LLM is only invoked for the reasoning step, consuming just 391 tokens in total. Agent B, by contrast, consumed 28,603 tokens to answer the same question. That is a **96.3% cost reduction**, and Agent C also responded faster.
+
+It is also worth noting Agent A. On cost alone it appears competitive, but its answer is wrong — it has no access to live prices and will confidently hallucinate figures from its training data. Cheap and incorrect is not a viable architecture.
+
+The conclusion is straightforward: reserve your LLM for language tasks, and handle everything else — data retrieval, calculation, formatting — in code. The LLM does not need to fetch a stock price - you ca do that for it!
