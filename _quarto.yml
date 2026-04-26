@@ -1,12 +1,6 @@
 project:
   type: website
   output-dir: _site
-  render:
-    - "index.qmd"
-    - "!ml-fundamentals/**"
-    - "!ml-coding/**"
-    - "!applied-ml/**"
-    - "!ml-projects/**"
 
 website:
   title: "Patrick Lowry"

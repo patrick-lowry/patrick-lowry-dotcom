@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Reducing LLM costs - don’t ask them to do everything! – Patrick Lowry</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-26827f95213357c060b998e0666f8ebe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../assets/css/custom-dark.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Patrick Lowry</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ml-fundamentals/"> 
+<span class="menu-text">ML Fundamentals</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ml-coding/"> 
+<span class="menu-text">ML Coding</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../applied-ml/"> 
+<span class="menu-text">Applied ML</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#an-llms-job-is-to-interpret-and-generate-language" id="toc-an-llms-job-is-to-interpret-and-generate-language" class="nav-link active" data-scroll-target="#an-llms-job-is-to-interpret-and-generate-language">An LLM’s job is to interpret and generate language</a></li>
+  <li><a href="#an-llm-does-not-continue-to-learn-once-it-is-deployed" id="toc-an-llm-does-not-continue-to-learn-once-it-is-deployed" class="nav-link" data-scroll-target="#an-llm-does-not-continue-to-learn-once-it-is-deployed">An LLM does not continue to learn once it is deployed</a></li>
+  <li><a href="#much-of-the-work-of-an-agent-is-spent-calling-tools-under-the-instruction-of-an-llm" id="toc-much-of-the-work-of-an-agent-is-spent-calling-tools-under-the-instruction-of-an-llm" class="nav-link" data-scroll-target="#much-of-the-work-of-an-agent-is-spent-calling-tools-under-the-instruction-of-an-llm">Much of the work of an agent is spent calling tools under the instruction of an LLM</a></li>
+  <li><a href="#a-worked-example-reducing-llm-costs-by-96" id="toc-a-worked-example-reducing-llm-costs-by-96" class="nav-link" data-scroll-target="#a-worked-example-reducing-llm-costs-by-96">A Worked Example — Reducing LLM Costs by 96%</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reducing LLM costs - don’t ask them to do everything!</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>There’s still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, such assumptions can lead to erroneous results and exploding costs — particularly when LLMs are asked to perform non-language tasks.</p>
+<p>This is rooted in a misunderstanding of what an agent is and what a Large Language Model is. Hopefully this article will help clarify the difference and through a real experiment we’ll see how choosing the right architecture reduced LLM costs by over 96%.</p>
+<section id="an-llms-job-is-to-interpret-and-generate-language" class="level2">
+<h2 class="anchored" data-anchor-id="an-llms-job-is-to-interpret-and-generate-language">An LLM’s job is to interpret and generate language</h2>
+<p>A Large Language Model’s core capability is in interpreting and generating language. Trained on large-scale text corpora, an LLM builds a high-dimensional representation of language patterns within its neural network that allows it to associate words with each other based on context. For example, in the sentence <em>“I read the paper”</em>, the LLM will associate the word <em>paper</em> with newspapers, magazines, journals etc., whereas in the sentence <em>“it was made of paper”</em> the word has a completely different meaning and may instead be associated with materials like wood or cardboard.</p>
+</section>
+<section id="an-llm-does-not-continue-to-learn-once-it-is-deployed" class="level2">
+<h2 class="anchored" data-anchor-id="an-llm-does-not-continue-to-learn-once-it-is-deployed">An LLM does not continue to learn once it is deployed</h2>
+<p>An LLM can interpret language only against the data it was trained upon. If you prompt an LLM for today’s news headlines, a well-designed model will typically acknowledge its knowledge cutoff and decline to answer — though in some cases it may hallucinate (make something up). Large language models are trained on data up to a specific date — after which their knowledge is frozen. Events, discoveries, or changes after this cutoff may result in outdated or incorrect responses.</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Training cutoff dates for Anthropic Sonnet LLMs</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Training Data Cutoff</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Claude 3 Sonnet</td>
+<td style="text-align: left;">August 2023</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Claude 3.5 Sonnet (original)</td>
+<td style="text-align: left;">April 2024</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Claude Sonnet 4.6</td>
+<td style="text-align: left;">August 2025</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="much-of-the-work-of-an-agent-is-spent-calling-tools-under-the-instruction-of-an-llm" class="level2">
+<h2 class="anchored" data-anchor-id="much-of-the-work-of-an-agent-is-spent-calling-tools-under-the-instruction-of-an-llm">Much of the work of an agent is spent calling tools under the instruction of an LLM</h2>
+<p>Considering that an LLM “only” interprets and generates language — how does something like ChatGPT provide such meaningful and relevant results? The answer is through additional tools that have a very verbose description. For example, ChatGPT will have access to a Web Search tool, a Weather tool and a Stock Lookup tool. Each of these tools will have a well-documented definition (like an instruction manual) that describes in clear language what the tool does, how to use it and what response it returns. In fact, a standard has emerged called the Model Context Protocol for describing tools so they can be discovered by LLMs.</p>
+<p>Because an LLM can interpret language, it is able to decipher the user’s prompt and match it to the context provided by the tool and then call the tool to return a response.</p>
+<p>This can be illustrated via the weather example. A typical interaction might be:</p>
+<ol type="1">
+<li>User prompts ChatGPT: “What’s the weather in London?”</li>
+<li>ChatGPT, acting as an agent, provides its LLM with the user’s prompt and descriptions of available tools in its kit bag (e.g.&nbsp;“This weather service can provide the current weather when provided with the name of a city, it returns the current temperature in degrees celsius, wind speed in mph and wind direction as a compass heading”)</li>
+<li>Using its language interpretation skills, the ChatGPT’s LLM semantically matches the user’s prompt with the tool descriptions and associates the weather tool with the user’s request</li>
+<li>ChatGPT invokes the weather service and retrieves the response</li>
+<li>ChatGPT’s LLM formats the result into a natural language response</li>
+<li>It returns the response to the user</li>
+</ol>
+<p>What this shows is that the LLM is only responsible for interpreting and generating language and that a lot of the work is actually being performed by an agent’s toolkit. The key to reducing costs is to use an LLM only where language understanding is required. Everything else — particularly deterministic, repeatable, or computational tasks — should be handled outside of the agentic workflow.</p>
+<p>In other words, don’t make the LLM have to waste time and energy working out what tools it needs to call, call them and then interpret the results - by doing the groundwork yourself you can dramatically cut costs. Here’s a worked example to illustrate…..</p>
+</section>
+<section id="a-worked-example-reducing-llm-costs-by-96" class="level2">
+<h2 class="anchored" data-anchor-id="a-worked-example-reducing-llm-costs-by-96">A Worked Example — Reducing LLM Costs by 96%</h2>
+<p>In this worked example I call an LLM directly (i.e.&nbsp;not via ChatGPT or claude.ai) — this allows me to report on token usage and thus cost, and compare scenarios where I provide tools versus no tools.</p>
+<p>As an example we consider a user who wants an analysis of a portfolio of stocks and shares. We test three different architectures to satisfy this request:</p>
+<ul>
+<li><strong>Agent A (no tools)</strong> — the LLM is given only the user’s question and must rely entirely on its training data to estimate stock prices. It produces an answer quickly and cheaply, but the prices are invented — this is hallucination in practice.</li>
+<li><strong>Agent B (web search)</strong> — the LLM is given a web search tool so it can look up live prices itself. It returns a correct answer, but in doing so it retrieves and processes large volumes of search result text, flooding the context with tokens it largely doesn’t need.</li>
+<li><strong>Agent C (smart architecture)</strong> — stock prices are fetched deterministically in code using a free market data API, portfolio values are calculated programmatically, and only the resulting figures are passed to the LLM. The LLM is asked to do only what an LLM should do: reason about the data and respond in natural language.</li>
+</ul>
+<p>The results speak for themselves:</p>
+<table class="table-striped table-hover caption-top table">
+<caption>Token usage and cost by agent architecture</caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 18%">
+<col style="width: 19%">
+<col style="width: 18%">
+<col style="width: 11%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Experiment</th>
+<th style="text-align: right;">Input Tokens</th>
+<th style="text-align: right;">Output Tokens</th>
+<th style="text-align: right;">Total Tokens</th>
+<th style="text-align: right;">Latency</th>
+<th style="text-align: right;">Cost (USD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Agent A — no tools</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">332</td>
+<td style="text-align: right;">388</td>
+<td style="text-align: right;">8,860ms</td>
+<td style="text-align: right;">$0.0051</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Agent B — web search</td>
+<td style="text-align: right;">27,425</td>
+<td style="text-align: right;">1,178</td>
+<td style="text-align: right;">28,603</td>
+<td style="text-align: right;">21,787ms</td>
+<td style="text-align: right;">$0.0999</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agent C — LLM reasoning</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">391</td>
+<td style="text-align: right;">5,258ms</td>
+<td style="text-align: right;">$0.0037</td>
+</tr>
+</tbody>
+</table>
+<p>Agent C consumed just 391 tokens in total — because the data retrieval and calculation were handled entirely in code, at no LLM cost whatsoever. Agent B, by contrast, consumed 28,603 tokens to answer the same question. That is a <strong>96.3% cost reduction</strong>, and Agent C also responded faster.</p>
+<p>It is also worth noting Agent A. On cost alone it appears competitive, but its answer is wrong — it has no access to live prices and will confidently hallucinate figures from its training data. Cheap and incorrect is not a viable architecture.</p>
+<p>The conclusion is straightforward: reserve your LLM for language tasks, and handle everything else — data retrieval, calculation, formatting — in code. The LLM does not need to fetch a stock price; you can do that for it!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
