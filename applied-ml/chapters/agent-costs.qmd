@@ -17,15 +17,11 @@ An LLM can interpret language only against the data it was trained upon. If you 
 
 | Model | Training Data Cutoff |
 |:------|:---------------------|
-| Claude 3 Haiku | August 2023 |
 | Claude 3 Sonnet | August 2023 |
-| Claude 3 Opus | August 2023 |
 | Claude 3.5 Sonnet (original) | April 2024 |
-| Claude 3.5 Sonnet (new, Oct 2024) | April 2024 |
-| Claude 3.5 Haiku | July 2024 |
 | Claude Sonnet 4.6 | August 2025 |
 
-: Training cutoff dates for Anthropic Claude models {.striped .hover}
+: Training cutoff dates for Anthropic Sonnet LLMs {.striped .hover}
 
 ## Much of the work of an agent is spent calling tools under the instruction of an LLM
 
@@ -37,14 +33,14 @@ This can be illustrated via the weather example. A typical interaction might be:
 
 1. User prompts ChatGPT: "What's the weather in London?"
 2. ChatGPT, acting as an agent, provides its LLM with the user's prompt and descriptions of available tools in its kit bag (e.g. "This weather service can provide the current weather when provided with the name of a city, it returns the current temperature in degrees celsius, wind speed in mph and wind direction as a compass heading")
-3. Using its language interpretation skills, the agent's LLM semantically matches the user's prompt with the tool descriptions and associates the weather tool with the user's request
+3. Using its language interpretation skills, the ChatGPT's LLM semantically matches the user's prompt with the tool descriptions and associates the weather tool with the user's request
 4. ChatGPT invokes the weather service and retrieves the response
 5. ChatGPT's LLM formats the result into a natural language response
 6. It returns the response to the user
 
-What this shows is that the LLM is only responsible for interpreting and generating language.
+What this shows is that the LLM is only responsible for interpreting and generating language and that a lot of the work is actually being performed by an agent's toolkit. The key to reducing costs is to use an LLM only where language understanding is required. Everything else — particularly deterministic, repeatable, or computational tasks — should be handled outside of the agentic workflow. 
 
-Therefore, the key to reducing costs is to use an LLM only where language understanding is required. Everything else — particularly deterministic, repeatable, or computational tasks — should be handled outside of the agentic workflow.
+In other words, don't make the LLM have to waste time and energy working out what tools it needs to call, call them and then interpret the results - by doing the groundwork yourself you can dramatically cut costs. Here's a worked example to illustrate.....
 
 ## A Worked Example — Reducing LLM Costs by 96%
 
@@ -62,13 +58,12 @@ The results speak for themselves:
 |:-----------|-------------:|--------------:|-------------:|--------:|-----------:|
 | Agent A — no tools | 56 | 332 | 388 | 8,860ms | $0.0051 |
 | Agent B — web search | 27,425 | 1,178 | 28,603 | 21,787ms | $0.0999 |
-| Agent C — data fetch | 0 | 0 | 0 | 872ms | $0.0000 |
 | Agent C — LLM reasoning | 181 | 210 | 391 | 5,258ms | $0.0037 |
 
 : Token usage and cost by agent architecture {.striped .hover}
 
-Agent C's data fetch step costs nothing — it is plain Python code calling a free API, with no LLM involved at all. The LLM is only invoked for the reasoning step, consuming just 391 tokens in total. Agent B, by contrast, consumed 28,603 tokens to answer the same question. That is a **96.3% cost reduction**, and Agent C also responded faster.
+Agent C consumed just 391 tokens in total — because the data retrieval and calculation were handled entirely in code, at no LLM cost whatsoever. Agent B, by contrast, consumed 28,603 tokens to answer the same question. That is a **96.3% cost reduction**, and Agent C also responded faster.
 
 It is also worth noting Agent A. On cost alone it appears competitive, but its answer is wrong — it has no access to live prices and will confidently hallucinate figures from its training data. Cheap and incorrect is not a viable architecture.
 
-The conclusion is straightforward: reserve your LLM for language tasks, and handle everything else — data retrieval, calculation, formatting — in code. The LLM does not need to fetch a stock price - you ca do that for it!
+The conclusion is straightforward: reserve your LLM for language tasks, and handle everything else — data retrieval, calculation, formatting — in code. The LLM does not need to fetch a stock price; you can do that for it!
