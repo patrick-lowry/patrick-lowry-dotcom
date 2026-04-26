@@ -23,7 +23,7 @@ title: "Home"
 
 ## Applied ML
 
-- [Agent Costs](applied-ml/chapters/agent-costs.qmd)
+- [A simple measure to reduce LLM costs](applied-ml/chapters/agent-costs.qmd)
 
 ---
 

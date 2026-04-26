@@ -3,9 +3,9 @@ title: "Reducing LLM costs - don't ask them to do everything!"
 format: html
 ---
 
-There's still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, and such assumptions can lead to erroneous results and exploding costs — particularly when non-language tasks are pushed through an expensive language interface.
+There's still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, such assumptions can lead to erroneous results and exploding costs — particularly when LLMs are asked to perform non-language tasks.
 
-This is rooted in a misunderstanding of what an agent is and what a Large Language Model is. Hopefully this article will help clarify that, and through a real experiment I'll show how choosing the right architecture reduced my LLM costs by over 96%.
+This is rooted in a misunderstanding of what an agent is and what a Large Language Model is. Hopefully this article will help clarify the difference and through a real experiment we'll see how choosing the right architecture reduced LLM costs by over 96%.
 
 ## An LLM's job is to interpret and generate language
 
