@@ -33,7 +33,7 @@ This can be illustrated via the weather example. A typical interaction might be:
 
 1. User prompts ChatGPT: "What's the weather in London?"
 2. ChatGPT, acting as an agent, provides its LLM with the user's prompt and descriptions of available tools in its kit bag (e.g. "This weather service can provide the current weather when provided with the name of a city, it returns the current temperature in degrees celsius, wind speed in mph and wind direction as a compass heading")
-3. Using its language interpretation skills, the ChatGPT's LLM semantically matches the user's prompt with the tool descriptions and associates the weather tool with the user's request
+3. Using its language interpretation skills, ChatGPT's LLM semantically matches the user's prompt with the tool descriptions and associates the weather tool with the user's request
 4. ChatGPT invokes the weather service and retrieves the response
 5. ChatGPT's LLM formats the result into a natural language response
 6. It returns the response to the user
