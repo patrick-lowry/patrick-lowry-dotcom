@@ -6,6 +6,7 @@ title: "Home"
 
 - [Neural Networks](ml-fundamentals/chapters/neural_networks.qmd)
 - [Vectors](ml-fundamentals/chapters/vectors.qmd)
+- [Classification](ml-fundamentals/chapters/vector_classification.qmd)
 
 ---
 

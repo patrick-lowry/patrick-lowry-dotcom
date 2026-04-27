@@ -1,0 +1,81 @@
+[
+  {
+    "label": "agent_a_no_tools",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 24,
+    "output_tokens": 168,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 4391.853731998708,
+    "tool_calls": [],
+    "cost_usd": 0.0025919999999999997,
+    "total_tokens": 192
+  },
+  {
+    "label": "agent_b_with_tools",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 3826,
+    "output_tokens": 993,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 20434.475631001987,
+    "tool_calls": [
+      {
+        "tool": "get_nearby_cities",
+        "input_keys": [
+          "lat",
+          "lon"
+        ]
+      },
+      {
+        "tool": "get_weather",
+        "input_keys": [
+          "lat",
+          "lon"
+        ]
+      },
+      {
+        "tool": "get_weather",
+        "input_keys": [
+          "lat",
+          "lon"
+        ]
+      },
+      {
+        "tool": "get_weather",
+        "input_keys": [
+          "lat",
+          "lon"
+        ]
+      },
+      {
+        "tool": "get_weather",
+        "input_keys": [
+          "lat",
+          "lon"
+        ]
+      },
+      {
+        "tool": "get_weather",
+        "input_keys": [
+          "lat",
+          "lon"
+        ]
+      }
+    ],
+    "cost_usd": 0.026373,
+    "total_tokens": 4819
+  },
+  {
+    "label": "agent_c_llm_recommendation",
+    "model": "claude-sonnet-4-6",
+    "input_tokens": 739,
+    "output_tokens": 110,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 0,
+    "latency_ms": 10383.573854007409,
+    "tool_calls": [],
+    "cost_usd": 0.0038669999999999998,
+    "total_tokens": 849
+  }
+]

@@ -6,3 +6,4 @@ title: "ML Fundamentals for Non-techies"
 
 - [Neural Networks](chapters/neural_networks.qmd)
 - [Vectors](chapters/vectors.qmd)
+- [Classification](chapters/vector_classification.qmd)
