@@ -5,27 +5,19 @@ format: html
 
 ## Introduction
 
-AI has dramatically reduced the cost of building software. That much is clear.
+AI has dramatically reduced the cost of building software. That much is clear. What's less clear is whether that changes anything for the enterprise — because building software, although complex, was never the only reason to buy a package. There are costs of operating it, securing it, upgrading it not to mention accountability when things go wrong.
 
-What's less clear is whether that changes anything for the enterprise — because building software was never really the problem. The problem was owning it. Securing it. Keeping it running. Being accountable when it breaks.
-
-That's the question worth asking: not whether AI can write code faster, but whether it changes the fundamental reasons enterprises reach for package software in the first place.
-
-The short answer is: less than you'd think.
+So although there's a ot of focus on the reduncing cost of software develpomen, is that a compelling enough reason to throw out your packages and revert to a custom build approach?
 
 ---
 
-## What Are We Actually Talking About?
-
-By package software, we mean off-the-shelf products deployed within an enterprise — whether that's a traditional on-premise application or a SaaS platform. Think ERPs, CRMs, HR systems, procurement tools. The software that runs the business rather than differentiating it.
-
-These systems are expensive, often inflexible, and increasingly resented. So the question of whether AI changes their value proposition is a legitimate one. But to answer it properly, you have to understand why enterprises adopted them in the first place.
+## What is package software?
+By package software, we mean off-the-shelf products deployed within an enterprise — whether that's a traditional on-premise application or a SaaS platform. Think ERPs, CRMs, HR systems, procurement tools.
+These systems are expensive and often inflexible but they take away a lot of the headaches and accountability. So the question of whether AI changes their value proposition is a legitimate one. But to answer it properly, you have to understand why enterprises adopted them in the first place.
 
 ---
 
-## Why Enterprises Bought Packages
-
-The reasons are more varied than they might appear.
+## Why Enterprises Buy Packages
 
 ### Lack of engineering capability
 
@@ -57,9 +49,7 @@ Package software is proven at scale. It's been hardened across thousands of cust
 
 AI has meaningfully reduced the cost of writing software. Tasks that once took weeks can now take days, and the gap will keep narrowing.
 
-But it's worth being precise about what that does and doesn't change.
-
-AI reduces the cost of *building* software. It does much less for the cost of *owning* it — which includes operating it, securing it, integrating it, governing it, and being accountable for what it does. These are organisational and legal problems, not just engineering ones, and AI barely touches them.
+Yes, AI reduces the cost of *building* software but it does much less for the cost of *owning* it — which includes operating it, securing it, integrating it, governing it, and being accountable for what it does. These are organisational and legal problems, not just engineering ones, and AI barely touches them.
 
 Let's go through each of the original reasons in turn.
 
