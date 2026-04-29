@@ -5,114 +5,116 @@ format: html
 
 ## Introduction
 
-AI has dramatically reduced the cost of building software—but not the cost of owning it.  
+AI has dramatically reduced the cost of building software. That much is clear.
 
-So why do enterprises still rely so heavily on package software?
+What's less clear is whether that changes anything for the enterprise — because building software was never really the problem. The problem was owning it. Securing it. Keeping it running. Being accountable when it breaks.
 
----
+That's the question worth asking: not whether AI can write code faster, but whether it changes the fundamental reasons enterprises reach for package software in the first place.
 
-## What is Package Software?
-
-By package software, we mean off-the-shelf products deployed within an enterprise—either as traditional on-premise applications or SaaS platforms.
+The short answer is: less than you'd think.
 
 ---
 
-## Why Do Enterprises Use It?
+## What Are We Actually Talking About?
 
-### Lack of IT skills  
-Many enterprises simply don’t have the capability to design, build and operate software at scale.
+By package software, we mean off-the-shelf products deployed within an enterprise — whether that's a traditional on-premise application or a SaaS platform. Think ERPs, CRMs, HR systems, procurement tools. The software that runs the business rather than differentiating it.
 
-### Core competency  
-If your business is centred around retail, banking or logistics, building and running a high-performing engineering organisation can be a significant cultural and operational shift. Many companies choose packages so they can stay focused on their core business.
-
-### Lack of differentiation  
-If a capability doesn’t provide competitive advantage, it rarely makes sense to build it yourself—using a standard package is often more efficient.
-
-### Regulation  
-In heavily regulated domains, compliance requirements can make custom development costly and risky.
-
-### Complex IT estate  
-In large enterprises with organically grown legacy systems, package software often provides mature integration capabilities that are difficult to replicate.
-
-### Support, scalability and reliability  
-Package software is typically proven at scale, with dedicated vendor support and architectures that have been hardened across many customers.
+These systems are expensive, often inflexible, and increasingly resented. So the question of whether AI changes their value proposition is a legitimate one. But to answer it properly, you have to understand why enterprises adopted them in the first place.
 
 ---
 
-## Disadvantages
+## Why Enterprises Bought Packages
 
-- Vendor lock-in  
-- Limited differentiation—you get the same features as everyone else  
-- High cost  
-- Limited control—you depend on vendor roadmaps  
+The reasons are more varied than they might appear.
 
----
+### Lack of engineering capability
 
-## What Has Changed?
+Many enterprises simply don't have the capability to design, build and operate software at scale. A regional insurer or a national logistics company isn't going to build a world-class engineering organisation overnight. Package software let them acquire capability without building it.
 
-AI has significantly reduced the cost and time required to build software, making custom solutions far more accessible than before.  
+### Core competency
 
-But does that invalidate the traditional advantages of package software? Let’s reassess each one.
+If your business is centred around retail, banking or manufacturing, running a high-performing engineering organisation is a significant cultural and operational shift — not just a hiring exercise. Many enterprises made a rational choice to stay focused on what they're actually good at, and buy the rest.
 
----
+### No competitive advantage
 
-In reality, we’re not there yet.  
+If a capability doesn't differentiate you from competitors, building it yourself is hard to justify. A finance department running a standard accounts payable process doesn't need bespoke software — it needs reliable, auditable software that everyone already knows how to use.
 
-The cost of building and, more importantly, operating software is still significant. For most enterprises, package solutions remain the safer and more economical choice today.  
+### Regulatory burden
 
-However, this is the area to watch. As AI continues to reduce development and operational costs, the economics may shift—particularly if package vendors continue to push pricing upwards.
+In heavily regulated industries, compliance requirements make custom development genuinely risky. When an auditor asks why your payroll system calculates pension contributions a particular way, "we built it ourselves" is not a comfortable answer. Package vendors carry certifications, compliance histories and legal accountability that custom systems can't easily replicate.
 
----
+### Legacy complexity
 
-## Re-evaluating the Trade-offs
+Large enterprises have IT estates that grew organically over decades. Package software often provides mature integration capabilities — connectors, APIs, data standards — that are extraordinarily difficult to replicate from scratch. The value isn't just in the features, it's in the accumulated integrations.
 
-### Lack of IT skills  
-AI reduces the need for large engineering teams, but it doesn’t remove the need for architecture, governance and operational ownership.
+### Scale and reliability
 
-### Core competency  
-While AI lowers the barrier to building software, it doesn’t change organisational culture. Many enterprises still struggle to operate as product-led organisations.
-
-### Lack of differentiation  
-If a capability offers no competitive advantage, packages remain the logical choice.  
-
-However, AI reduces the cost of building bespoke solutions, making it increasingly viable to customise areas that were previously considered commodity.
-
-### Regulation  
-This remains a strong reason to use package software. AI does little to reduce the burden of compliance, auditability and legal accountability.
-
-### Complex IT estate  
-Package software still offers advantages in complex environments, although agentic AI may begin to reduce the need for tightly integrated monolithic systems by acting as a more flexible orchestration layer.
-
-### Support, scalability and reliability  
-AI improves monitoring and recovery, but operational responsibility still sits with the enterprise.
+Package software is proven at scale. It's been hardened across thousands of customers, stress-tested in ways no single enterprise could replicate. The vendor's support model, SLAs and incident response are part of what you're paying for.
 
 ---
 
-## The Real Advantage: Risk Transfer  
+## What Has AI Actually Changed?
 
-Beyond functionality, package software transfers a significant amount of risk away from the enterprise.  
+AI has meaningfully reduced the cost of writing software. Tasks that once took weeks can now take days, and the gap will keep narrowing.
 
-- Security vulnerabilities  
-- Regulatory compliance  
-- System resilience and uptime  
-- Data integrity  
+But it's worth being precise about what that does and doesn't change.
 
-When you build your own system, you own these risks entirely.  
-With a package, that responsibility is shared with the vendor.  
+AI reduces the cost of *building* software. It does much less for the cost of *owning* it — which includes operating it, securing it, integrating it, governing it, and being accountable for what it does. These are organisational and legal problems, not just engineering ones, and AI barely touches them.
 
-This is one of the primary reasons package software remains so dominant—and something AI does little to change.
+Let's go through each of the original reasons in turn.
+
+### Engineering capability
+
+AI reduces the number of engineers needed to build a given piece of software. But it doesn't remove the need for architecture, governance and operational ownership. Someone still has to make the right decisions, respond to incidents and take responsibility when things go wrong. The headcount required is lower — but the capability required is not.
+
+### Core competency
+
+The barrier to building software has lowered. But the barrier to *operating as a software company* has not. Culture, product thinking, talent retention, engineering leadership — none of these are solved by AI. Most enterprises still can't make this shift, and frankly, many shouldn't. It's not their business.
+
+### No competitive advantage
+
+This is where the economics are starting to shift most noticeably. AI reduces the cost of building bespoke solutions, which means the threshold for "worth building yourself" is moving. Capabilities that were previously considered commodities — and therefore natural candidates for package software — are starting to look viable as custom builds. Not everywhere. Not yet. But the trend is real.
+
+### Regulatory burden
+
+AI changes very little here. Compliance, auditability and legal accountability still rest on institutional structures, certifications and documented processes. If anything, AI-generated code introduces new questions about provenance and liability that regulators are still working out.
+
+### Legacy complexity
+
+Package software still has a significant advantage in complex legacy environments, though this is worth watching. Agentic AI — systems that can act across multiple tools and workflows — may begin to reduce the need for tightly integrated monolithic platforms by providing a more flexible orchestration layer. It's early, but the direction is clear.
+
+### Scale and reliability
+
+AI improves monitoring and automated recovery. But operational responsibility still sits with whoever built and deployed the system. A package vendor's SLA is worth something precisely because there's a contract behind it.
 
 ---
 
-## Conclusion
+## The Real Reason Package Software Survives
 
-Package software isn’t dead.  
+Here's what often gets missed in these discussions.
 
-But the economics are starting to shift.  
+Beyond functionality, package software transfers a significant amount of *risk* away from the enterprise.
 
-Smaller vendors without strong differentiation or regulatory moats will find it increasingly difficult to justify their pricing.  
+When you deploy a major vendor's ERP, you're not just buying features. You're buying a shared responsibility model. Security vulnerabilities, regulatory compliance, system resilience, data integrity — when something goes wrong, the vendor is in the room with you. They have obligations. They have insurance. They have a reputation to protect.
 
-Large enterprise platforms, deeply embedded in complex environments, are far more resilient—but even they are not immune to long-term pressure.  
+When you build your own system, you own all of that entirely.
 
-You don’t need to rip them out today.  
-But you do need to start questioning where you truly need them—and where you don’t.
+This risk transfer is one of the primary reasons package software remains so dominant in enterprise — and it's something AI does almost nothing to change. AI can help you write better code faster. It cannot make you less accountable for what that code does.
+
+---
+
+## So Is It Dead?
+
+No. But the economics are shifting.
+
+Smaller vendors with thin moats — those competing primarily on functionality in areas without strong regulatory or complexity advantages — are going to find it increasingly hard to justify their pricing. If a reasonably capable engineering team can build a functional equivalent in a fraction of the time it once took, the value proposition of a mid-market SaaS product becomes harder to defend.
+
+Large enterprise platforms are more resilient. They're embedded in complex environments, carry years of integrations and compliance history, and benefit from deep institutional trust. They're not going away soon.
+
+But even they should be paying attention.
+
+The right question for any enterprise today is not "should we replace our package software?" It's more precise than that: *where does the risk transfer and complexity argument still hold, and where is it just inertia dressed up as strategy?*
+
+You don't need to rip anything out today.
+
+But you do need to start asking harder questions about what you're actually paying for — and whether it's still worth it.
