@@ -1,6 +1,8 @@
 ---
 title: "Reducing LLM costs - don't ask them to do everything!"
-format: html
+format:
+  html:
+    css: draft.css
 ---
 
 There's still a lot of confusion regarding agentic AI and a common perception that agents are general-purpose problem solvers. This is certainly not the case, such assumptions can lead to erroneous results and exploding costs — particularly when LLMs are asked to perform non-language tasks.

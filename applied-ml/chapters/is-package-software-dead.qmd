@@ -1,7 +1,11 @@
 ---
 title: "Is Package Software Dead?"
-format: html
+format:
+  html:
+    css: draft.css
 ---
+
+<-- DRAFT -->
 
 ## Introduction
 

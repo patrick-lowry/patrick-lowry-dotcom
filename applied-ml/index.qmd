@@ -5,3 +5,4 @@ title: "Applied ML"
 ## Articles
 
 - [Agent Costs](chapters/agent-costs.qmd)
+- [Is Package Software Dead?](chapters/is-package-software-dead.qmd)

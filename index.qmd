@@ -20,11 +20,10 @@ title: "Home"
 
 ---
 
----
-
 ## Applied ML
 
 - [A simple measure to reduce LLM costs](applied-ml/chapters/agent-costs.qmd)
+- [Is Package Software Dead?](applied-ml/chapters/is-package-software-dead.qmd)
 
 ---
 
