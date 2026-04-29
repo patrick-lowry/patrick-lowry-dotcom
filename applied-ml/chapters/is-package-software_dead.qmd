@@ -1,0 +1,118 @@
+---
+title: "Is Package Software Dead?"
+format: html
+---
+
+## Introduction
+
+AI has dramatically reduced the cost of building software—but not the cost of owning it.  
+
+So why do enterprises still rely so heavily on package software?
+
+---
+
+## What is Package Software?
+
+By package software, we mean off-the-shelf products deployed within an enterprise—either as traditional on-premise applications or SaaS platforms.
+
+---
+
+## Why Do Enterprises Use It?
+
+### Lack of IT skills  
+Many enterprises simply don’t have the capability to design, build and operate software at scale.
+
+### Core competency  
+If your business is centred around retail, banking or logistics, building and running a high-performing engineering organisation can be a significant cultural and operational shift. Many companies choose packages so they can stay focused on their core business.
+
+### Lack of differentiation  
+If a capability doesn’t provide competitive advantage, it rarely makes sense to build it yourself—using a standard package is often more efficient.
+
+### Regulation  
+In heavily regulated domains, compliance requirements can make custom development costly and risky.
+
+### Complex IT estate  
+In large enterprises with organically grown legacy systems, package software often provides mature integration capabilities that are difficult to replicate.
+
+### Support, scalability and reliability  
+Package software is typically proven at scale, with dedicated vendor support and architectures that have been hardened across many customers.
+
+---
+
+## Disadvantages
+
+- Vendor lock-in  
+- Limited differentiation—you get the same features as everyone else  
+- High cost  
+- Limited control—you depend on vendor roadmaps  
+
+---
+
+## What Has Changed?
+
+AI has significantly reduced the cost and time required to build software, making custom solutions far more accessible than before.  
+
+But does that invalidate the traditional advantages of package software? Let’s reassess each one.
+
+---
+
+In reality, we’re not there yet.  
+
+The cost of building and, more importantly, operating software is still significant. For most enterprises, package solutions remain the safer and more economical choice today.  
+
+However, this is the area to watch. As AI continues to reduce development and operational costs, the economics may shift—particularly if package vendors continue to push pricing upwards.
+
+---
+
+## Re-evaluating the Trade-offs
+
+### Lack of IT skills  
+AI reduces the need for large engineering teams, but it doesn’t remove the need for architecture, governance and operational ownership.
+
+### Core competency  
+While AI lowers the barrier to building software, it doesn’t change organisational culture. Many enterprises still struggle to operate as product-led organisations.
+
+### Lack of differentiation  
+If a capability offers no competitive advantage, packages remain the logical choice.  
+
+However, AI reduces the cost of building bespoke solutions, making it increasingly viable to customise areas that were previously considered commodity.
+
+### Regulation  
+This remains a strong reason to use package software. AI does little to reduce the burden of compliance, auditability and legal accountability.
+
+### Complex IT estate  
+Package software still offers advantages in complex environments, although agentic AI may begin to reduce the need for tightly integrated monolithic systems by acting as a more flexible orchestration layer.
+
+### Support, scalability and reliability  
+AI improves monitoring and recovery, but operational responsibility still sits with the enterprise.
+
+---
+
+## The Real Advantage: Risk Transfer  
+
+Beyond functionality, package software transfers a significant amount of risk away from the enterprise.  
+
+- Security vulnerabilities  
+- Regulatory compliance  
+- System resilience and uptime  
+- Data integrity  
+
+When you build your own system, you own these risks entirely.  
+With a package, that responsibility is shared with the vendor.  
+
+This is one of the primary reasons package software remains so dominant—and something AI does little to change.
+
+---
+
+## Conclusion
+
+Package software isn’t dead.  
+
+But the economics are starting to shift.  
+
+Smaller vendors without strong differentiation or regulatory moats will find it increasingly difficult to justify their pricing.  
+
+Large enterprise platforms, deeply embedded in complex environments, are far more resilient—but even they are not immune to long-term pressure.  
+
+You don’t need to rip them out today.  
+But you do need to start questioning where you truly need them—and where you don’t.
