@@ -1,0 +1,135 @@
+# AI Architecture Patterns
+
+This is a catalog of architectural patterns for building AI systems. The patterns span different concerns — how context is designed and delivered, how deterministic AI workflows are structured, and how agents are coordinated. They are not a framework, and they do not form a strict hierarchy. Some are foundational for agentic systems specifically; others are useful regardless of whether agents are involved.
+
+---
+
+## Context Patterns
+
+Agentic systems are only as capable as the context they can access and reason over. These patterns address how that context is designed, connected and assembled. Agent performance at runtime is directly constrained by the quality of the context architecture beneath it.
+
+### Semantic Context Layer
+
+The Semantic Context Layer is the practice of describing data, tools and documents richly enough for an agent to reason over them — not merely retrieve them.
+
+This goes beyond search indexes and API documentation. It means ensuring that the meaning, relationships and intended use of information are legible to an agent at runtime. A document that a human would find obvious can be opaque to an agent if it lacks sufficient semantic structure.
+
+### MCP Connectivity
+
+MCP (Model Context Protocol) provides standardised transport connecting agents to data sources, tools and services at runtime, allowing agents to interact with external systems without bespoke integration for each one.
+
+An agent built against MCP-compliant connectors is portable; one built against one-off integrations is fragile. As the MCP ecosystem matures, the availability of standardised connectors will increasingly determine which capabilities are practical to expose to agents.
+
+### Context Architecture (Design Time)
+
+Before an agent runs, decisions have already been made that will shape everything it does: what is indexed, what is remembered, what is exposed, and in what form. This is context architecture — the structural decisions made at design time that determine what the agent can see.
+
+An agent cannot compensate at runtime for context that was never made available to it. Poor context architecture produces agents that hallucinate, miss relevant information, or fail on exactly the cases they were built for.
+
+### Context Engineering (Runtime)
+
+If context architecture defines what is available, context engineering determines what is actually assembled and passed to the model for a given task, at a given moment. It is the discipline of dynamic context assembly — selecting, filtering, compressing and sequencing information in real time to maximise the relevance and quality of what the model receives.
+
+Larger context windows create more opportunity to provide richer information — but also more opportunity to dilute it with noise. The discipline is in knowing what to include, what to leave out, and in what order.
+
+---
+
+## Pipeline Patterns
+
+Pipelines are deterministic, configurable workflows that use AI models as processing components. They do not involve agent reasoning loops — the flow is defined in advance, and AI adds intelligence at specific stages within a controlled structure. They are reliable, auditable and well-suited to high-volume or latency-sensitive tasks.
+
+### Audio Processing Pipeline
+
+Audio in, preprocessing, model, structured output. The model performs transcription, language translation, sentiment or stress detection — and the output is a structured artefact that downstream systems can act on.
+
+Production implementations require careful attention to preprocessing (noise reduction, speaker diarisation, format normalisation) and to the shape of the output schema.
+
+### Streaming Inference Pipeline
+
+Built for real-time decisions on high-velocity data. An event stream feeds into feature extraction, model scoring, and an action or alert. The pattern covers fraud detection, anomaly detection and predictive maintenance — any case where decisions need to be made continuously and quickly on incoming data.
+
+Latency and throughput are the primary constraints. The model must score fast enough to keep pace with the stream; feature extraction must be stateless or nearly so.
+
+### Training and Scoring Pipeline
+
+Historical data flows through feature engineering, model training, deployment and scoring, producing predictions that feed into business processes — churn models, recommendation engines, maintenance forecasting.
+
+What distinguishes modern implementations from their predecessors is the increasingly automated nature of each stage. Feature engineering can be augmented by generative models; deployment can be triggered by evaluation thresholds; scoring can feed back into training data.
+
+### Data Preparation Pipeline
+
+Raw data in, transform, clean or generate, validated output dataset out. The AI component here is increasingly doing real work: deduplicating records, harmonising inconsistent schemas, generating synthetic data to fill gaps.
+
+Models trained or operating on poorly prepared data will underperform in ways that are hard to attribute. Data preparation pipelines should be treated as first-class architectural components, not preprocessing scripts.
+
+---
+
+## Agent Orchestration Patterns
+
+These patterns describe how agents are structured, combined and controlled to carry out complex tasks. They involve reasoning loops — agents that plan, act, observe and adjust. The patterns differ in how much autonomy is granted, how work is divided, and how quality is assured.
+
+### Single Agent (ReAct)
+
+A single agent follows a reason-act-observe loop: it considers the task, takes an action, observes the result, and reasons about what to do next. This continues until the task is complete or a stopping condition is reached.
+
+ReAct is well-understood, relatively easy to debug, and appropriate for self-contained tasks with clear success criteria.
+
+### Multi-Agent: Orchestrator and Specialists
+
+One orchestrator agent decomposes the task and delegates to specialist sub-agents. Each specialist handles a well-defined domain — research, code generation, data retrieval, communication — and returns results to the orchestrator for synthesis.
+
+The orchestrator does not need to be expert in everything; it needs to know what to ask of whom, and how to integrate the answers. The architecture scales well but introduces coordination complexity: the orchestrator's reasoning quality becomes the primary bottleneck.
+
+### Parallel Agents
+
+Independent agents work simultaneously on different aspects of a problem, with results aggregated at the end. Suited to tasks that can be decomposed into genuinely independent workstreams — competitive analysis across multiple markets, simultaneous drafting of document sections, parallel evaluation of candidate solutions.
+
+The key design consideration is the aggregation step. Parallel execution is straightforward; synthesising independent outputs coherently requires the most care.
+
+### Pipeline Agents
+
+The output of one agent becomes the input of the next. Each agent in the sequence performs a transformation — extract, analyse, summarise, format — and passes its output downstream. Unlike Pipeline Patterns, each stage here involves agent reasoning, not just model inference.
+
+The sequence is fixed; each agent has a clear, bounded role. It works well when the steps of a task are known in advance and the order matters.
+
+### Evaluator / Critic
+
+A second agent reviews the output of the first before it is accepted. The critic checks for accuracy, completeness, consistency or alignment with specified criteria — and either approves the output, requests revisions, or flags it for human review.
+
+This pattern adds latency and cost in exchange for improved output quality — a worthwhile trade on tasks where errors are consequential.
+
+### Planner and Executor
+
+A planner agent produces a structured plan — a sequence of steps, with dependencies and success criteria — and an executor agent follows it.
+
+This separation works well when the task is complex enough that interleaving planning and execution produces poor results. The plan is also an inspectable artefact that can be reviewed, edited or overridden before execution begins.
+
+### Reflexion / Self-Correcting Agent
+
+The agent iterates on its own output until it passes a defined test. After each attempt, it evaluates the result against a criterion — a test suite, a rubric, a constraint — and revises its approach if the criterion is not met.
+
+Best suited to tasks with clear, automatable evaluation criteria: code that must pass tests, outputs that must conform to a schema, responses that must satisfy factual checks.
+
+### Debate / Multi-Perspective
+
+Agents take opposing positions on a problem and argue their cases. A meta-agent — or the same model in a subsequent pass — synthesises the arguments and reaches a conclusion.
+
+Suited to decisions with genuine uncertainty or competing considerations — strategic analysis, risk assessment, policy evaluation — where a single agent's reasoning is likely to be one-sided.
+
+### Memory-Augmented Agent
+
+The agent has access to persistent memory across interactions: short-term working memory for the current task, long-term memory for accumulated knowledge, and episodic memory for specific past experiences. Memory is retrieved, used and updated as the agent operates.
+
+Memory introduces significant design complexity: what to remember, how to index it, when to retrieve it, and how to prevent it from degrading over time. These are infrastructure problems, not afterthoughts.
+
+### Human-in-the-Loop
+
+The agent operates autonomously up to a defined confidence threshold, then escalates to a human for review or decision. The human provides input, and the agent continues.
+
+The design challenge is in calibrating the threshold: too low and the agent escalates constantly, providing no leverage; too high and consequential errors pass through without review.
+
+---
+
+## Conclusion
+
+These patterns can be combined. Most production agentic systems use several in concert — a memory-augmented orchestrator delegating to specialists via MCP connectors, with a critic reviewing outputs before surfacing to a human-in-the-loop. The catalog provides a vocabulary for those design decisions, not a prescription for how to make them.
