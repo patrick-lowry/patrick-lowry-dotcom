@@ -5,9 +5,9 @@ title: Machine Learning Fundamentals - Learn through coding
 ### Contents
 - [Python setup](chapters/00-setup.ipynb)
 - [Regression](chapters/01-regression.ipynb)
-- [Vectors](chapters/02-vectors.ipynb)
-- [Classification 01](chapters/03-classification.ipynb)
-- [Classification 02](chapters/04-classification-02.ipynb)
+- [Vectors and Similarity](chapters/02-vectors.ipynb)
+- [Classification with the Perceptron Algorithm](chapters/03-classification.ipynb)
+- [Classification with the Perceptron Algorithm - Part 2](chapters/04-classification-02.ipynb)
 
 
 © 2026 Patrick Lowry | [GitHub](link) | [LinkedIn](https://www.linkedin.com/in/patrick-lowry/)
