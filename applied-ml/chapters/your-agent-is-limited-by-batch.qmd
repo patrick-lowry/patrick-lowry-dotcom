@@ -1,0 +1,73 @@
+---
+title: "Your agent is limited by batch"
+format:
+  html:
+    css: draft.css
+---
+
+## Imagine this scenario
+Your competitor cuts the price of a competing product. Your pricing agent spots it within minutes, works out a sensible response and recommends a new price. Then it hits a wall: prices are managed in a legacy system that only updates in an overnight batch. The agent can suggest, but it can't act. The change lands tomorrow, and until then you're selling at the wrong price.
+
+The agent isn't the bottleneck. The system it depends on is.
+
+It's easy to spend agentic AI budgets on the visible part, such as rolling out coding assistants like GitHub Copilot, and overlook what sits underneath.
+
+## What the future looks like
+
+If agents are going to orchestrate business processes, monitoring, deciding and acting across the systems that run the business, then those systems become the constraint on how quickly and how well the business can respond. The intelligence sits on top, but the speed and scope are set underneath.
+
+## We've been here before
+
+I've seen this before. In the digital era, many enterprises built websites and apps with a bold vision of a seamless, real-time customer experience, only to find the back end couldn't keep up. It didn't matter how good the front end was.
+
+A large retailer wanted to show customers live stock levels at their three nearest stores. It couldn't, because its back-end systems had never been designed to support a high-volume, 24x7 website. They were built to serve stores and internal users, not to be queried constantly by the public.
+
+A mobile phone operator wanted to launch promotions with minimal lead time so it could respond to the market. But every change had to join a weekly sprint release cycle, so promotions had to be planned four weeks ahead to secure a slot. The marketing was fast. The path to production wasn't.
+
+In both cases the ambition was digital and the ceiling was legacy: capacity in the first, pace of change in the second.
+
+## The threat of new entrants
+
+The third example is about structure. A package holiday operator wanted to sell dynamic bundles of flights and hotels online to compete with online travel agents such as Expedia. It couldn't. Its mainframe had been built for a brochure business, where holidays were effectively welded together three months in advance and couldn't be priced in their component parts. The new entrants had no such baggage.
+
+That's the real risk of leaving legacy alone. It doesn't stop working; someone without it simply moves faster. Agents widen the gap between decision and action, and that gap becomes a competitive measure.
+
+## The same three walls, and a new one
+
+I'd expect agents to run into the same three walls, only harder:
+
+- **Structure.** An agent assembling offers, or a customer's agent comparing yours with others, needs products and prices that can be broken apart and recombined. A product welded together months ahead can't take part.
+- **Volume.** Agent traffic will probably look different from human browsing: constant, parallel, with retries. That's my expectation rather than established fact, but it's a reasonable one, and it means the capacity problem could return.
+- **Pace.** In the digital era the business moved at human speed and was held back by its release cycle. An agent can spot an opportunity in minutes, so the mismatch is bigger.
+
+There's also a new wall: **trust.** Digital channels mostly had humans reading data and initiating transactions. Agents decide and act, which raises questions legacy systems weren't designed to answer.
+
+- **Control and identity.** Legacy security assumes a human in a known channel, with the front end enforcing the rules and the user journey acting as the audit trail. An agent makes service calls with no navigational context. If the only identity available is a powerful integration account, every agent action looks the same. "Which agent did this, on whose behalf, within what limits?" often has no answer, so the controls have to move down into the infrastructure rather than rely on the front end.
+- **Meaning.** Legacy data is often understood only by the people who know it (what does status 7 really mean?). A human might ask a colleague; an agent may confidently act on a misreading.
+- **Stale data.** In the digital era, a stale batch meant wrong information on a screen. With agents, it means a wrong action based on yesterday's data.
+
+Structure, volume and pace limit what agents can do. Meaning and control limit what they can safely be allowed to do.
+
+## Can't AI solve this for me?
+
+Partly, but not the way people hope. AI can genuinely help you understand legacy: analysing code, documenting it, extracting business rules and generating tests. But you can't simply point an agent at a codebase of millions of lines and expect it to work it all out in one go, because it's far bigger than any context window. In practice, understanding is built up in stages, module by module, with the findings written down and checked by people who know the domain. And the code doesn't tell the whole story: why a rule exists, what the batch run does in practice and what the business relies on often live in people's heads.
+
+More fundamentally, understanding legacy isn't the same as changing it. Even with a perfect specification, the data migration, integration and process change remain. As with package software, the engineering is often the easy part.
+
+## What can we do about it?
+
+I'd think of three responses:
+
+1. **Protect.** Give agents their own identities, limits and quotas, and segregate their traffic so they can't degrade the experience for customers or overload the core.
+2. **Expose.** Provide APIs and MCP wrappers with clear descriptions so agents can reach legacy capability.
+3. **Fix.** Change what legacy can actually do: real-time data, products that can be broken apart, faster release.
+
+The first two are quicker, and most organisations will start there, which is sensible. But none of my three examples would have been solved by protecting or exposing. The welded holidays, the overnight batch and the four-week release cycle would all still be there. Wrapping legacy isn't fixing it; it's a ramp, not a destination.
+
+For the third, the well-established approach is the strangler pattern: rather than a big-bang replacement, you build new capability around the edges of the legacy system and gradually redirect functionality to it until the old system can be retired. Prioritise by the cost of latency, starting with the processes where slowness costs real money, such as pricing and stock availability. And accept that this is a long-term commitment. It won't fit in an annual budget cycle, and it won't be quick.
+
+## Conclusion
+
+Agentic AI will only be as fast as the systems behind it. The organisations that benefit most won't just be those with the best agents, but those that have done the harder, less glamorous work underneath. The digital era hit this wall. Agents will hit it again, harder.
+
+*Legacy is one of several things enterprises need to get right beyond giving everyone a coding assistant. Changing how software is delivered, and making systems ready for agents as a new channel, matter too, and I'll come back to them.*
